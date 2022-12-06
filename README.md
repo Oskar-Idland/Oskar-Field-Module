@@ -1,30 +1,33 @@
 # Critical
-!!NEEDS NUMPY AND NUMBA TO FUNCTION!!\n
+!!NEEDS NUMPY, NUMBA AND MATPLOTLIB TO FUNCTION!!
 
 # General Info
-Class for calculating and plotting electromagnetic fields and potentials in 3d. Requires numba and numpy\n\n
+import using 
+```Python
+>>> pip install OskarFieldModule
+```
+Class for calculating and plotting electromagnetic fields and potentials in 3d. Requires numba, numpy and matplotlib
 
 # Functions
 
 ## Efield, Epot
-Field and potential from point charge\n
-efieldLine, epotLine - Field and potential from line charge parallel to x, y or z axis. Can be placed anywhere in 3D\n
+Field and potential from line charge parallel to x, y or z axis. Can be placed anywhere in 3D
 
 
 ## EfieldCircle, EpotCircle 
-Field and potential from circle charge in origin\n
+Field and potential from circle charge in origin
 
 ## BfieldLine
-Field from line current parallel to x, y or z axis. Can be placed anywhere in 3D\n
+Field from line current parallel to x, y or z axis. Can be placed anywhere in 3D
 
 ## BfieldCircle
-Field from circular current in origin\n\n
+Field from circular current in origin
 
 ## PlotVector
-Plots vector field. Customize colorscheme, density, and figsize\n
+Plots vector field. Customize colorscheme, density, and figsize
 
 ## PlotContour
-Plots vector field. Customize colorscheme, levels, norm and figsize\n
+Plots vector field. Customize colorscheme, levels, norm and figsize
 
 ## PlotCircle
 Plots circle just using radius
@@ -127,5 +130,5 @@ Plots circle just using radius
 >>> Field.PlotVector(rx, rz, Bx, Bz, 'stream', broken_streamlines=False, show = True, cmap = 'inferno', density = .5)   
 ```
 
-[Github-flavored Markdown](https://github.com/Oskar-Idland/FYS-1120/tree/main/ELMAG_Module)
+[Github-flavored Markdown](https://github.com/Oskar-Idland/Oskar-Field-Module)
 
