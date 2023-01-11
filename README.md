@@ -52,12 +52,17 @@ r_Q = np.array([[0.0, 0.0, 0.0]])
 plane = 'xy'
 
 rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
-Field.PlotVector(rx, ry, Ex, Ey, 'quiver', show = True, save=True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointCharge.pdf"))
-
+Field.PlotVector(rx, ry, Ex, Ey, 'quiver', show = True, save=True, 
+                 name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointCharge.pdf"))
 N = 100
 rx, ry, V = Field.CalculateEpot(L, N, Q, r_Q, plane)
-Field.PlotContour(rx, ry, V, show=True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointChargeContour.pdf"))
+Field.PlotContour(rx, ry, V, show=True, save = True, 
+                  name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointChargeContour.pdf"))
 ```
+<img src="https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/ELMAG_Module/src/Example_Figures/PointCharge.pdf" alt="Point Charge" title="Point Charge">
+
+
+![Point Charge](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/ELMAG_Module/src/Example_Figures/PointCharge.pdf?raw=true "Point Charge")
 ## Double Point Charge Example
 ```python     
 
@@ -69,7 +74,8 @@ r_Q = np.array([[-1.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
 plane = 'xy'
 
 rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
-Field.PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoublePointCharge.pdf"))
+Field.PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False, save = True, 
+                 name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoublePointCharge.pdf"))
 ```
 ## Double Line Charge Example
 ```python       
@@ -85,9 +91,11 @@ plane = 'xz'
 rx, rz, Ex, Ez = Field.CalculateEfieldLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
 rx, rz, V = Field.CalculateEpotLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
 
-Field.PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineCharge.pdf"))
+Field.PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True, save = True, 
+                 name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineCharge.pdf"))
 
-Field.PlotContour(rx, rz, V, show = True, norm = 'linear', save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineChargeContour.pdf"))
+Field.PlotContour(rx, rz, V, show = True, norm = 'linear', save = True, 
+                  name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineChargeContour.pdf"))
 ```
 ## Circular Charge Example
 ```python
@@ -108,7 +116,8 @@ plt.show()
 N = 500
 ry, rz, V = Field.CalculateEpotCircle(L, N, circle_charge, radius, plane, plane_circles)
 Field.PlotContour(ry, rz, V, show = False, equal = True)
-Field.PlotCircle(radius[0], show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCharge.pdf"))
+Field.PlotCircle(radius[0], show = True, save = True, 
+                 name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCharge.pdf"))
 ```
 ## Line Current Example
 ```python
@@ -123,7 +132,8 @@ plane = 'yz'
 
 rx, rz, Bx, Bz = Field.CalculateBfieldLine(L, N, line_currents, line_lengths, line_center_coords, axis, plane)
 
-Field.PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Line Current', show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "LineCurrent.pdf"))
+Field.PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Line Current', show = True, save = True, 
+                 name = os.path.join(os.path.dirname(__file__), "Example_Figures", "LineCurrent.pdf"))
 ```
 ## Circular Current Example
 ```python
@@ -136,7 +146,9 @@ plane = 'xz'
 circle_planes = ['xy']
 rx, rz, Bx, Bz = Field.CalculateBfieldCircle(L, N, circle_currents, radii, plane, circle_planes)
 
-Field.PlotVector(rx, rz, Bx, Bz, 'stream', title = 'Magnetic Field from Circular Line Current', broken_streamlines=False, show = True, cmap = 'inferno', density = .5, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCurrent.pdf"))
+Field.PlotVector(rx, rz, Bx, Bz, 'stream', title = 'Magnetic Field from Circular Line Current', broken_streamlines=False, 
+                 show = True, cmap = 'inferno', density = .5, save = True, 
+                 name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCurrent.pdf"))
 ```
 
 [Github](https://github.com/Oskar-Idland/Oskar-Field-Module)
