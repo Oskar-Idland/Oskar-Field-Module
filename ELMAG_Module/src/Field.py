@@ -1,139 +1,142 @@
 from numba import njit
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 
 class Field():
     '''
-    # Critical
-    !!NEEDS NUMPY AND NUMBA TO FUNCTION!!\n
-    
-    # General Info
-    Class for calculating and plotting electromagnetic fields and potentials in 3d. Requires numba and numpy\n\n
-    
-    # Functions
-    
-    ## Efield, Epot
-    Field and potential from point charge\n
-    efieldLine, epotLine - Field and potential from line charge parallel to x, y or z axis. Can be placed anywhere in 3D\n
-    
-    
-    ## EfieldCircle, EpotCircle 
-    Field and potential from circle charge in origin\n
-    
-    ## BfieldLine
-    Field from line current parallel to x, y or z axis. Can be placed anywhere in 3D\n
-    
-    ## BfieldCircle
-    Field from circular current in origin\n\n
-    
-    ## PlotVector
-    Plots vector field. Customize colorscheme, density, and figsize\n
-    
-    ## PlotContour
-    Plots vector field. Customize colorscheme, levels, norm and figsize\n
-    
-    ## PlotCircle
-    Plots circle just using radius
-        
-    # See example code below:
+# Critical
+!!NEEDS NUMPY AND NUMBA TO FUNCTION!!
 
-    ## Single Point Charge
-        
-    >>> L = 2
-    >>> N = 10
-    >>> Q = [1.0]
-    >>> r_Q = np.array([[0.0, 0.0, 0.0]])
-    >>> plane = 'xy'
-    
-    >>> rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
-    >>> Field.PlotVector(rx, ry, Ex, Ey, 'quiver', show = True)
-    
-    >>> N = 100
-    >>> rx, ry, V = Field.CalculateEpot(L, N, Q, r_Q, plane)
-    >>> Field.PlotContour(rx, ry, V, show=True)
-    
-    
-    ## Double Point Charge Example     
-    
-    >>> L = 2
-    >>> N = 100
-    >>> Q = [2.0, -2.0]
-    >>> r_Q = [-1, 1]
-    >>> r_Q = np.array([[-1.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
-    >>> plane = 'xy'
-    
-    >>> rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
-    >>> Field.PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False)
-    
-    ## Double Line Charge Example       
-    
-    >>> L = 2
-    >>> N = 50
-    >>> line_charges = [-1, 1]
-    >>> line_lengths = [1, 1]
-    >>> line_center_coords = [[0, 0, -1], [0, 0, 1]]
-    >>> axis = ['x', 'x']
-    >>> plane = 'xz'
-    
-    >>> rx, rz, Ex, Ez = Field.CalculateEfieldLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
-    >>> rx, rz, V = Field.CalculateEpotLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
-    
-    >>> Field.PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True)
-    >>> Field.PlotContour(rx, rz, V, show = True, norm = 'linear') 
-    
-    
-    ## Circular Charge Example
-    
-    >>> L = 5
-    >>> N = 100
-    >>> circle_charge = [5]
-    >>> radius = [2]
-    >>> plane = 'yz'
-    >>> plane_circles = ['yz']
-    >>> ry, rz, Ey, Ez = Field.CalculateEfieldCircle(L, N, circle_charge, radius, plane, plane_circles)
-    >>> Field.PlotVector(ry, rz, Ey, Ez, 'stream', show = False, equal = True)
+# General Info
+Class for calculating and plotting electromagnetic fields and potentials in 3d. Requires numba and numpy
 
-    >>> t = np.linspace(0, 2*np.pi, 100)
-    >>> plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
-    >>> plt.show()
+# Functions
 
-    >>> N = 500
-    >>> ry, rz, V = Field.CalculateEpotCircle(L, N, circle_charge, radius, plane, plane_circles)
-    >>> Field.PlotContour(ry, rz, V, show = False, equal = True)
-    
-    >>> t = np.linspace(0, 2*np.pi, 100)
-    >>> plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
-    >>> plt.show()
-    
-    
-    ## Line Current Example
-    
-    >>> L = 5
-    >>> N = 24
-    >>> line_currents = [5]
-    >>> line_lengths = [1]
-    >>> line_center_coords = [[0.0, 0.0, 0.0]]
-    >>> axis = ['x']
-    >>> plane = 'yz'
-    
-    >>> rx, rz, Bx, Bz = Field.CalculateBfieldLine(L, N, line_currents, line_lengths, line_center_coords, axis, plane)
-    
-    >>> Field.PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Lin e Current', show = True)
+## Efield, Epot
+Field and potential from point charge\n
+efieldLine, epotLine - Field and potential from line charge parallel to x, y or z axis. Can be placed anywhere in 3D\n
 
-    ## Circular Current Example
 
-    >>> L = 8
-    >>> N = 40
-    >>> circle_currents = [5]
-    >>> radii = [5]
-    >>> plane = 'xz'
-    >>> circle_planes = ['xy']
-    >>> rx, rz, Bx, Bz = Field.CalculateBfieldCircle(L, N, circle_currents, radii, plane, circle_planes)
+## EfieldCircle, EpotCircle 
+Field and potential from circle charge in origin\n
+
+## BfieldLine
+Field from line current parallel to x, y or z axis. Can be placed anywhere in 3D\n
+
+## BfieldCircle
+Field from circular current in origin\n\n
+
+## PlotVector
+Plots vector field. Customize colorscheme, density, and figsize\n
+
+## PlotContour
+Plots vector field. Customize colorscheme, levels, norm and figsize\n
+
+## PlotCircle
+Plots circle just using radius
     
-    >>> Field.PlotVector(rx, rz, Bx, Bz, 'stream', broken_streamlines=False, show = True, cmap = 'inferno', density = .5)    
+# See example code below:
+
+
+## Point Charge Example
+```python
+
+L = 2
+N = 10
+Q = [1.0]
+r_Q = np.array([[0.0, 0.0, 0.0]])
+plane = 'xy'
+
+rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
+Field.PlotVector(rx, ry, Ex, Ey, 'quiver', show = True, save=True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointCharge.pdf"))
+
+N = 100
+rx, ry, V = Field.CalculateEpot(L, N, Q, r_Q, plane)
+Field.PlotContour(rx, ry, V, show=True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointChargeContour.pdf"))
+```
+
+## Double Point Charge Example
+```python     
+
+L = 2
+N = 100
+Q = [2.0, -2.0]
+r_Q = [-1, 1]
+r_Q = np.array([[-1.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
+plane = 'xy'
+
+rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
+Field.PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoublePointCharge.pdf"))
+```
+## Double Line Charge Example
+```python       
+
+L = 2
+N = 100
+line_charges = [-1, 1]
+line_lengths = [1, 1]
+line_center_coords = [[0, 0, -1], [0, 0, 1]]
+axis = ['x', 'x']
+plane = 'xz'
+
+rx, rz, Ex, Ez = Field.CalculateEfieldLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
+rx, rz, V = Field.CalculateEpotLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
+
+Field.PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineCharge.pdf"))
+
+Field.PlotContour(rx, rz, V, show = True, norm = 'linear', save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineChargeContour.pdf"))
+```
+## Circular Charge Example
+```python
+
+L = 5
+N = 100
+circle_charge = [5]
+radius = [2]
+plane = 'yz'
+plane_circles = ['yz']
+ry, rz, Ey, Ez = Field.CalculateEfieldCircle(L, N, circle_charge, radius, plane, plane_circles)
+Field.PlotVector(ry, rz, Ey, Ez, 'stream', show = False, equal = True)
+
+t = np.linspace(0, 2*np.pi, 100)
+plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
+plt.show()
+
+N = 500
+ry, rz, V = Field.CalculateEpotCircle(L, N, circle_charge, radius, plane, plane_circles)
+Field.PlotContour(ry, rz, V, show = False, equal = True)
+Field.PlotCircle(radius[0], show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCharge.pdf"))
+```
+## Line Current Example
+```python
+
+L = 5
+N = 24
+line_currents = [5]
+line_lengths = [1]
+line_center_coords = [[0.0, 0.0, 0.0]]
+axis = ['x']
+plane = 'yz'
+
+rx, rz, Bx, Bz = Field.CalculateBfieldLine(L, N, line_currents, line_lengths, line_center_coords, axis, plane)
+
+Field.PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Line Current', show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "LineCurrent.pdf"))
+```
+## Circular Current Example
+```python
+
+L = 8
+N = 40
+circle_currents = [5]
+radii = [5]
+plane = 'xz'
+circle_planes = ['xy']
+rx, rz, Bx, Bz = Field.CalculateBfieldCircle(L, N, circle_currents, radii, plane, circle_planes)
+
+Field.PlotVector(rx, rz, Bx, Bz, 'stream', title = 'Magnetic Field from Circular Line Current', broken_streamlines=False, show = True, cmap = 'inferno', density = .5, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCurrent.pdf"))
+```
     '''
-    
     @staticmethod
     @njit
     def Efield(r: np.ndarray, particle_pos: np.ndarray, q: float, eps = 8.854187817E-12) -> np.ndarray:
@@ -162,7 +165,7 @@ class Field():
 
 
     @classmethod
-    def CalculateEfield(cls, L: float, N: int, Q: list, R: np.ndarray, plane: str, eps: float = 8.854187817E-12) -> np.ndarray:
+    def CalculateEfield(cls, L: float, N: int, Q: list[float], R: np.ndarray, plane: str, eps: float = 8.854187817E-12) -> np.ndarray:
         '''
         Calculates electric field from one or more point charges\n
         
@@ -170,7 +173,7 @@ class Field():
         L - [float] Length of side of cube area calculated\n
         N - [int] Number of points in the meshgrid\n
         Q - [list] List of each particles charge. Must be nested (see example code)\n
-        R - [ndarray] List of each particles position in 3D. Must be nested (see example code)\n
+R - [ndarray] Array  of each particles position in 3D. Must be nested (see example code)\n
         plane [str] - Plane of interest for plotting. 
         
         ### Optional
@@ -250,7 +253,7 @@ class Field():
         return V
     
     @classmethod
-    def CalculateEpot(cls, L: float, N: int, Q: list, R: list, plane: str, eps: float = 8.854187817E-12) -> np.ndarray:
+    def CalculateEpot(cls, L: float, N: int, Q: list[float], R: list[float], plane: str, eps: float = 8.854187817E-12) -> np.ndarray:
         '''
         Calculates electric potential from one or more point charges\n
         
@@ -258,7 +261,7 @@ class Field():
         L - [float] Length of side of cube area calculated\n
         N - [int] Number of points in the meshgrid\n
         Q - [list] List of each particle's charge. Must be nested (see example code)\n
-        R - [ndarray] List of each particle's position in 3D. Must be nested (see example code)\n
+        R - [ndarray] Array  of each particle's position in 3D. Must be nested (see example code)\n
         plane [str] - Plane of interest for plotting\n
         
         ### Optional
@@ -375,7 +378,7 @@ class Field():
 
 
     @classmethod
-    def CalculateEfieldLine(cls, L: float, N: int, line_charges: list, line_lengths: list, line_center_coords: list, axis: list, plane: str, eps = 8.854187817E-12, n = 100) -> np.ndarray:
+    def CalculateEfieldLine(cls, L: float, N: int, line_charges: list[float], line_lengths: list[float], line_center_coords: list[float], axis: list[str], plane: str, eps = 8.854187817E-12, n = 100) -> np.ndarray:
         '''
         Calculates electric field from one or more line charges\n
         
@@ -501,7 +504,7 @@ class Field():
             raise ValueError("Argument axis must be either 'x', 'y', or 'z'")
         
     @classmethod
-    def CalculateEpotLine(cls, L: float, N: int, line_charges: list, line_lengths: list, line_center_coords: list, axis: str, plane: str, eps = 8.854187817E-12, n = 100) -> np.ndarray:
+    def CalculateEpotLine(cls, L: float, N: int, line_charges: list[float], line_lengths: list[float], line_center_coords: list[float], axis: list[str], plane: str, eps = 8.854187817E-12, n = 100) -> np.ndarray:
         '''
         Calculates electric potential from one or more line charges\n
         
@@ -636,7 +639,7 @@ class Field():
             raise ValueError("Argument 'plane' must be either 'xy', 'xz', or 'yz'")
             
     @classmethod
-    def CalculateEfieldCircle(cls, L: float, N: int, circle_charges: list,  radii: list, plane: str, plane_circles: list, eps: float = 8.854187817E-12, n: int = 100) -> np.ndarray:
+    def CalculateEfieldCircle(cls, L: float, N: int, circle_charges: list[float],  radii: list[float], plane: str, plane_circles: list[float], eps: float = 8.854187817E-12, n: int = 100) -> np.ndarray:
         '''
         Calculates electric field from one or more circular charges centered around origin\n
         
@@ -773,7 +776,7 @@ class Field():
             raise ValueError("Argument 'plane' must be either 'xy', 'xz', or 'yz'")
         
     @classmethod
-    def CalculateEpotCircle(cls, L: float, N: int, circle_charges: list,  radii: list, plane: str, plane_circles: list, eps: float = 8.854187817E-12, n: int = 100) -> np.ndarray:
+    def CalculateEpotCircle(cls, L: float, N: int, circle_charges: list[float],  radii: list[float], plane: str, plane_circles: list[float], eps: float = 8.854187817E-12, n: int = 100) -> np.ndarray:
         '''
         Calculates electric potential from one or more circular charges centered around origin\n
         
@@ -897,7 +900,7 @@ class Field():
     
  
     @classmethod
-    def CalculateBfieldLine(cls, L: float, N: int, line_currents: list, line_lengths: list, line_center_coords: list, axis: list, plane: str, mu: float = 4*np.pi*1E-12, n: float = 100) -> np.ndarray:
+    def CalculateBfieldLine(cls, L: float, N: int, line_currents: list[float], line_lengths: list[float], line_center_coords: list[float], axis: list[float], plane: str, mu: float = 4*np.pi*1E-12, n: float = 100) -> np.ndarray:
         '''
         Calculates magnetic field from one or more lines charge\n
         
@@ -1027,7 +1030,7 @@ class Field():
             return B
     
     @classmethod
-    def CalculateBfieldCircle(cls, L: float, N: int, circle_currents: list, radii: list, plane: str, circle_planes: list, mu: float = 4*np.pi*1E-7, n: int = 100) -> np.ndarray:
+    def CalculateBfieldCircle(cls, L: float, N: int, circle_currents: list[float], radii: list[float], plane: str, circle_planes: list[float], mu: float = 4*np.pi*1E-7, n: int = 100) -> np.ndarray:
         '''
         Calculates magnetic field from one or more circular currents\n
         
@@ -1099,7 +1102,7 @@ class Field():
 
         
     @staticmethod
-    def PlotVector(r1: np.ndarray, r2: np.ndarray, U1: np.ndarray, U2: np.ndarray, type: str, title: str = '', figsize: tuple = (16,9), broken_streamlines: bool = True, density: float = 1, cmap: str = 'cool', equal: bool = False, show: bool = False, log10: bool = True) -> None:
+    def PlotVector(r1: np.ndarray, r2: np.ndarray, U1: np.ndarray, U2: np.ndarray, type: str, title: str = '', figsize: tuple = (16,9), broken_streamlines: bool = True, density: float = 1, cmap: str = 'cool', equal: bool = False, show: bool = False, save: bool = False, name: str = "Plot.pdf", log10: bool = True) -> None:
         '''
         Function which plots vector\n
         
@@ -1156,12 +1159,17 @@ class Field():
         if equal:
             plt.axis('equal')
             
+        if save:
+            plt.savefig(name)
+            
         if show:
             plt.show()
+            
+        
 
         
     @staticmethod
-    def PlotContour(r1: np.ndarray, r2: np.ndarray, V: np.ndarray, title: str = '', figsize: tuple = (16,9), levels: int = 200, norm: str = 'symlog', cmap: str = 'inferno', equal: bool = False, show: bool = False) -> None:
+    def PlotContour(r1: np.ndarray, r2: np.ndarray, V: np.ndarray, title: str = '', figsize: tuple = (16,9), levels: int = 200, norm: str = 'symlog', cmap: str = 'inferno', equal: bool = False, show: bool = False, save: bool = False, name: str = "Plot.pdf") -> None:
         '''
         Function which plots potential\n
         
@@ -1191,11 +1199,14 @@ class Field():
         plt.title(title)
         plt.colorbar()
         
+        if save:
+            plt.savefig(name)
+        
         if show:
             plt.show()
             
             
-    def PlotCircle(radius: float) -> None:
+    def PlotCircle(radius: float, show: bool = False, save: bool = False, name: str = "Plot.pdf") -> None:
         '''
         ## Input
         Plots circle\n
@@ -1205,4 +1216,102 @@ class Field():
         None
         '''
         t = np.linspace(0, 2*np.pi, 100)
-        plt.plot(radius*np.cos(t), radius*np.sin(t))  
+        plt.plot(radius*np.cos(t), radius*np.sin(t))
+        
+        if show:
+            plt.show()
+        
+        if save:
+            plt.savefig(name)
+            
+    
+if __name__ == "__main__":     
+    ## Point Charge Example
+
+    L = 2
+    N = 10
+    Q = [1.0]
+    r_Q = np.array([[0.0, 0.0, 0.0]])
+    plane = 'xy'
+
+    rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
+    Field.PlotVector(rx, ry, Ex, Ey, 'quiver', show = True, save=True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointCharge.pdf"))
+    
+    N = 100
+    rx, ry, V = Field.CalculateEpot(L, N, Q, r_Q, plane)
+    Field.PlotContour(rx, ry, V, show=True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "PointChargeContour.pdf"))
+
+    ## Double Point Charge Example     
+
+    L = 2
+    N = 100
+    Q = [2.0, -2.0]
+    r_Q = [-1, 1]
+    r_Q = np.array([[-1.0, 0.0, 0.0], [1.0, 0.0, 0.0]])
+    plane = 'xy'
+
+    rx, ry, Ex, Ey = Field.CalculateEfield(L, N, Q, r_Q, plane)
+    Field.PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoublePointCharge.pdf"))
+
+    ## Double Line Charge Example       
+
+    L = 2
+    N = 100
+    line_charges = [-1, 1]
+    line_lengths = [1, 1]
+    line_center_coords = [[0, 0, -1], [0, 0, 1]]
+    axis = ['x', 'x']
+    plane = 'xz'
+
+    rx, rz, Ex, Ez = Field.CalculateEfieldLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
+    rx, rz, V = Field.CalculateEpotLine(L, N, line_charges, line_lengths, line_center_coords, axis, plane)
+
+    Field.PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineCharge.pdf"))
+
+    Field.PlotContour(rx, rz, V, show = True, norm = 'linear', save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "DoubleLineChargeContour.pdf"))
+        
+    ## Circular Charge Example
+
+    L = 5
+    N = 100
+    circle_charge = [5]
+    radius = [2]
+    plane = 'yz'
+    plane_circles = ['yz']
+    ry, rz, Ey, Ez = Field.CalculateEfieldCircle(L, N, circle_charge, radius, plane, plane_circles)
+    Field.PlotVector(ry, rz, Ey, Ez, 'stream', show = False, equal = True)
+
+    t = np.linspace(0, 2*np.pi, 100)
+    plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
+    plt.show()
+
+    N = 500
+    ry, rz, V = Field.CalculateEpotCircle(L, N, circle_charge, radius, plane, plane_circles)
+    Field.PlotContour(ry, rz, V, show = False, equal = True)
+    Field.PlotCircle(radius[0], show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCharge.pdf"))
+
+    # ## Line Current Example
+
+    L = 5
+    N = 24
+    line_currents = [5]
+    line_lengths = [1]
+    line_center_coords = [[0.0, 0.0, 0.0]]
+    axis = ['x']
+    plane = 'yz'
+
+    rx, rz, Bx, Bz = Field.CalculateBfieldLine(L, N, line_currents, line_lengths, line_center_coords, axis, plane)
+
+    Field.PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Line Current', show = True, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "LineCurrent.pdf"))
+
+    ## Circular Current Example
+
+    L = 8
+    N = 40
+    circle_currents = [5]
+    radii = [5]
+    plane = 'xz'
+    circle_planes = ['xy']
+    rx, rz, Bx, Bz = Field.CalculateBfieldCircle(L, N, circle_currents, radii, plane, circle_planes)
+
+    Field.PlotVector(rx, rz, Bx, Bz, 'stream', title = 'Magnetic Field from Circular Line Current', broken_streamlines=False, show = True, cmap = 'inferno', density = .5, save = True, name = os.path.join(os.path.dirname(__file__), "Example_Figures", "CircularCurrent.pdf"))
