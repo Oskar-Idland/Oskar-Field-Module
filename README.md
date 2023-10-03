@@ -108,7 +108,7 @@ See [line charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/
 >>> plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
 >>> plt.show()
 ```
-See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCharge.pdf)
+See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCharge.pdf) & [circular charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularChargeContour.pdf)
 
 ## Line Current Example
 ```python
@@ -124,7 +124,7 @@ See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/b
 
 >>> PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Lin e Current', show = True)
 ```
-See [image](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/LineCurrent.pdf)
+See [B-field from line current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/LineCurrent.pdf)
 
 ## Circular Current Example
 ```python
@@ -138,6 +138,6 @@ See [image](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Exa
 
 >>> PlotVector(rx, rz, Bx, Bz, 'stream', broken_streamlines=False, show = True, cmap = 'inferno', density = .5)   
 ```
-See [image](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCurrent.pdf)
+See [B-field from circular current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCurrent.pdf)
 
 [Github-flavored Markdown](https://github.com/Oskar-Idland/Oskar-Field-Module)
