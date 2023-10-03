@@ -53,8 +53,6 @@ Plots circle just using radius
 >>> N = 100
 >>> rx, ry, V = CalculateEpot(L, N, Q, r_Q, plane)
 >>> PlotContour(rx, ry, V, show=True)
-
-
 ## Double Point Charge Example     
 
 >>> L = 2
@@ -66,9 +64,11 @@ Plots circle just using radius
 
 >>> rx, ry, Ex, Ey = CalculateEfield(L, N, Q, r_Q, plane)
 >>> PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False)
+```
+See [point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/PointCharge.pdf), [point charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/PointChargeContour.pdf) & [double point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoublePointCharge.pdf)
 
 ## Double Line Charge Example       
-
+```Python
 >>> L = 2
 >>> N = 50
 >>> line_charges = [-1, 1]
@@ -82,10 +82,11 @@ Plots circle just using radius
 
 >>> PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True)
 >>> PlotContour(rx, rz, V, show = True, norm = 'linear') 
-
+```
+See [line charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoubleLineCharge.pdf) & [line charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoubleLineChargeContour.pdf)
 
 ## Circular Charge Example
-
+```python
 >>> L = 5
 >>> N = 100
 >>> circle_charge = [5]
@@ -106,10 +107,11 @@ Plots circle just using radius
 >>> t = np.linspace(0, 2*np.pi, 100)
 >>> plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
 >>> plt.show()
-
+```
+See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCharge.pdf)
 
 ## Line Current Example
-
+```python
 >>> L = 5
 >>> N = 24
 >>> line_currents = [5]
@@ -121,9 +123,11 @@ Plots circle just using radius
 >>> rx, rz, Bx, Bz = CalculateBfieldLine(L, N, line_currents, line_lengths, line_center_coords, axis, plane)
 
 >>> PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Lin e Current', show = True)
+```
+See [image](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/LineCurrent.pdf)
 
 ## Circular Current Example
-
+```python
 >>> L = 8
 >>> N = 40
 >>> circle_currents = [5]
@@ -134,5 +138,6 @@ Plots circle just using radius
 
 >>> PlotVector(rx, rz, Bx, Bz, 'stream', broken_streamlines=False, show = True, cmap = 'inferno', density = .5)   
 ```
+See [image](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCurrent.pdf)
 
 [Github-flavored Markdown](https://github.com/Oskar-Idland/Oskar-Field-Module)
