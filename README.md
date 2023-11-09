@@ -65,7 +65,17 @@ Plots circle just using radius
 >>> rx, ry, Ex, Ey = CalculateEfield(L, N, Q, r_Q, plane)
 >>> PlotVector(rx, ry, Ex, Ey, 'stream', show = True, broken_streamlines = False)
 ```
-See [point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/PointCharge.pdf), [point charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/PointChargeContour.pdf) & [double point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoublePointCharge.pdf)
+### Point Charge Field
+<img src="src/Example_Figures/PointCharge.jpg" width="400"/>
+
+### Point Charge Potential
+<img src="src/Example_Figures/PointChargeContour.jpg" width="400"/>
+
+### Double Point Charge Field
+<img src="src/Example_Figures/DoublePointCharge.jpg" width="400"/>
+
+
+<!-- See [point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/PointCharge.pdf), [point charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/PointChargeContour.pdf) & [double point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoublePointCharge.pdf) -->
 
 ## Double Line Charge Example       
 ```Python
@@ -83,7 +93,13 @@ See [point charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob
 >>> PlotVector(rx, rz, Ex, Ez, 'stream', broken_streamlines = False, show = True)
 >>> PlotContour(rx, rz, V, show = True, norm = 'linear') 
 ```
-See [line charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoubleLineCharge.pdf) & [line charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoubleLineChargeContour.pdf)
+### Line Charge Field
+<img src="src/Example_Figures/DoubleLineCharge.jpg" width="400"/>
+
+### Line Charge Potential
+<img src="src/Example_Figures/DoubleLineChargeContour.jpg" width="400"/>
+
+<!-- See [line charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoubleLineCharge.pdf) & [line charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/DoubleLineChargeContour.pdf) -->
 
 ## Circular Charge Example
 ```python
@@ -108,7 +124,13 @@ See [line charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/
 >>> plt.plot(radius[0]*np.cos(t), radius[0]*np.sin(t))
 >>> plt.show()
 ```
-See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCharge.pdf) & [circular charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularChargeContour.pdf)
+### Circular Charge Field
+<img src="src/Example_Figures/CircularCharge.jpg" width="400"/>
+
+### Circular Charge Potential
+<img src="src/Example_Figures/CircularChargeContour.jpg" width="400"/>
+
+<!-- See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCharge.pdf) & [circular charge potential](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularChargeContour.pdf) -->
 
 ## Line Current Example
 ```python
@@ -124,7 +146,10 @@ See [circular charge field](https://github.com/Oskar-Idland/Oskar-Field-Module/b
 
 >>> PlotVector(rx, rz, Bx, Bz, 'quiver', title = 'Magnetic Field from Lin e Current', show = True)
 ```
-See [B-field from line current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/LineCurrent.pdf)
+### Line Current Magnetic Field
+<img src="src/Example_Figures/LineCurrent.jpg" width="400"/>
+
+<!-- See [B-field from line current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/LineCurrent.pdf) -->
 
 ## Circular Current Example
 ```python
@@ -138,6 +163,8 @@ See [B-field from line current](https://github.com/Oskar-Idland/Oskar-Field-Modu
 
 >>> PlotVector(rx, rz, Bx, Bz, 'stream', broken_streamlines=False, show = True, cmap = 'inferno', density = .5)   
 ```
-See [B-field from circular current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCurrent.pdf)
+### Circular Current Magnetic Field
+<img src="src/Example_Figures/CircularCurrent.jpg" width="400"/>
+<!-- See [B-field from circular current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCurrent.pdf) -->
 
 [Github-flavored Markdown](https://github.com/Oskar-Idland/Oskar-Field-Module)
