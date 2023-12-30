@@ -167,4 +167,4 @@ Plots circle just using radius
 <img src="src/Example_Figures/CircularCurrent.jpg" width="400"/>
 <!-- See [B-field from circular current](https://github.com/Oskar-Idland/Oskar-Field-Module/blob/main/src/Example_Figures/CircularCurrent.pdf) -->
 
-[Github-flavored Markdown](https://github.com/Oskar-Idland/Oskar-Field-Module)
+[GitHub](https://github.com/Oskar-Idland/Oskar-Field-Module)

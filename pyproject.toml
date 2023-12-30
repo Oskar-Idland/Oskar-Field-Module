@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "OskarFieldModule"
-version = "0.4.2"
+version = "0.4.3"
 authors = [
   { name="Oskar Idland", email="oskaridland@hotmail.com" },
 ]
-description = "Package for calculating eleSSctric and magnetic fields and potentials in the FYS-1120 Course "
+description = "Package for calculating electric and magnetic fields and potentials in the FYS-1120 Course "
 readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
@@ -19,4 +19,4 @@ classifiers = [
 
 [project.urls]
 "Homepage" = "https://github.com/Oskar-Idland/Oskar-Field-Module"
-"Bug Tracker" = "https://github.com/Oskar-Idland/Oskar-Field-Module"
+"Bug Tracker" = "https://github.com/Oskar-Idland/Oskar-Field-Module/issues"
